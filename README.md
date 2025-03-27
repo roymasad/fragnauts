@@ -1,8 +1,10 @@
 # Fragnauts
 
-A 3D online multiplayer game inspired by Dropzone, featuring combat on tiny random 3D planets. Built with BabylonJS, Firebase and TypeScript.
+A 3D online multiplayer game prototype inspired by Dropzone, featuring combat on tiny random 3D planets. Built with BabylonJS, Firebase realtime database and TypeScript.
 
 ![](screenshot.jpg)
+
+[Live Netlify link](https://fragnauts.netlify.app/) 
 
 ## Description
 
