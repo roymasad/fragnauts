@@ -32,7 +32,10 @@ module.exports = {
         assetModuleFilename: '[name][ext]'
     },
     plugins: [
-        new Dotenv(),
+        new Dotenv({
+            path: './.env', // Path to local .env file
+            systemvars: true, // Load environment variables from process.env as well for netlify
+          }),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),
