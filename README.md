@@ -1,12 +1,12 @@
 # Fragnauts
 
-A 3D online multiplayer game inspired by Dropzone, featuring combat on tiny random 3D planets. Built with BabylonJS and TypeScript.
+A 3D online multiplayer game inspired by Dropzone, featuring combat on tiny random 3D planets. Built with BabylonJS, Firebase and TypeScript.
 
 ![](screenshot.jpg)
 
 ## Description
 
-Fragnauts is an exciting 3D game where players engage in combat across procedurally generated small planets. The game combines tactical gameplay elements inspired by Dropzone with the unique challenge of spherical combat environments.
+Fragnauts is a 3D game prototype where players engage in combat across procedurally generated small planets/asteroids. The game combines tactical gameplay elements inspired by Dropzone with the unique challenge of spherical combat environments.
 
 ### Features
 
@@ -33,14 +33,13 @@ Fragnauts is an exciting 3D game where players engage in combat across procedura
 - [BabylonJS](https://www.babylonjs.com/) - 3D game engine
 - TypeScript - Programming language
 - Webpack - Build tool and development server
-- Firebase - Online multiplayer functionality
+- Firebase Realtime Database- Online low latency multiplayer functionality
 
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js (Latest LTS version recommended)
-- npm (comes with Node.js)
 
 ### Installation
 
@@ -56,8 +55,8 @@ npm install
 - **Space**: Activate jetpack
 - **Left Mouse Button** or **L**: Shoot
 - **C**: Toggle between third-person and orbit camera modes
-- **P**: Toggle debug cube visibility
-- **X**: Toggle debug visuals
+- **P**: Toggle player debug cube visibility
+- **X**: Toggle debug axis visuals
 
 ### Development
 

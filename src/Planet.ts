@@ -149,15 +149,15 @@ export class Planet {
             value: new Color3(0, 0, 0)
         });
         
-        //this.glowAnimation.setKeys(keys);
+        this.glowAnimation.setKeys(keys);
         
         // Add animation to the mesh
         this.mesh.material = material;
-        //material.animations = material.animations || [];
-        //material.animations.push(this.glowAnimation);
+        material.animations = material.animations || [];
+        material.animations.push(this.glowAnimation);
         
         // Start the glow animation
-        //this.scene.beginAnimation(material, 0, 60, true);
+        this.scene.beginAnimation(material, 0, 60, true);
         
         noiseTexture.wrapU = Texture.WRAP_ADDRESSMODE;
         noiseTexture.wrapV = Texture.WRAP_ADDRESSMODE;

@@ -18,22 +18,19 @@ class Game {
     private thirdPersonHeight: number = 1.5;
     private cameraTransitionSpeed: number = 0.05;
     private debugMode: boolean = false;
-    private axesViewer: AxesViewer | null = null;
+    private axesViewer: AxesViewer | null = null; // Player Debug Axis
     private lastFrameTime: number = Date.now();
     private _keyboardInitialized: boolean = false;
     private _keysPressed: Set<string> = new Set<string>();
-    private _lastLKeyPress: number = 0;
-    private _lKeyPressDelay: number = 250; // Minimum delay between shots in milliseconds
-    private _lKeyWasPressed: boolean = false; // New flag to track if L key was already pressed
+    // private _0KeyWasPressed: boolean = false; // Flag to track if x key was already pressed
     private frags: number = 0; // Track player's frags
     private fpsText!: GUI.TextBlock; // FPS counter
     private fragsText!: GUI.TextBlock; // Frags counter
     private fuelBar!: GUI.Rectangle; // Fuel bar background
     private fuelBarFill!: GUI.Rectangle; // Fuel bar fill
     private fuelText!: GUI.TextBlock; // Fuel percentage text
-    private lastMouseX: number | null = null; // Changed to nullable to handle first movement
+    private lastMouseX: number | null = null; 
     private mouseSensitivity: number = 0.005;
-    private debugMouseRotation: boolean = false;
     private _mouseMovement: number = 0; // Store mouse movement for processing
     private isPointerLocked: boolean = false; // Track pointer lock state
     
@@ -71,17 +68,17 @@ class Game {
         // Create directional light for sun-like effect
         const sunLight = new DirectionalLight("sunLight", new Vector3(1, 1, 1), this.scene);
         sunLight.intensity = 1.0;
-        sunLight.position = new Vector3(100000, 100000, 100000); // Position the light far from the planet
+        sunLight.position = new Vector3(1000, 1000, 1000); // Position the light far away from the planet
         
 
         // Create GUI
         this.setupGUI();
 
-        // Create the planet first
+        // Create the planet 
         this.planet = new Planet(this.scene);
         this.planet.create();
 
-        // Create the player relative to planet
+        // Create the local player relative to planet
         this.player = new Player(this.scene, this.planet);
         
         // Set initial debug cube visibility to false
@@ -125,7 +122,7 @@ class Game {
         // Add mouse click handler for shooting with improved event handling
         this.canvas.addEventListener('mousedown', (event) => {
             event.preventDefault(); // Prevent default browser behavior
-            console.log("Mouse down event triggered"); // Debug log
+            console.log("Mouse down event triggered"); 
             if (event.button === 0) { // Left mouse button
                 this.player.shoot();
             }
@@ -144,10 +141,10 @@ class Game {
                 this._keysPressed.add(key);
                 
                 // Handle L key shooting with "tap to shoot" behavior
-                if (key === 'l' && !this._lKeyWasPressed) {
-                    this._lKeyWasPressed = true; // Mark as pressed so it won't shoot again until released
-                    this.player.shoot();
-                }
+                // if (key === '0' && !this._lKeyWasPressed) {
+                //     this._0KeyWasPressed = true; // Mark as pressed so it won't shoot again until released
+                //     this.player.shoot();
+                // }
             });
 
             window.addEventListener('keyup', (event) => {
@@ -155,8 +152,8 @@ class Game {
                 this._keysPressed.delete(key);
                 
                 // Reset the L key flag when it's released
-                if (key === 'l') {
-                    this._lKeyWasPressed = false;
+                if (key === '0') {
+                    //this._0KeyWasPressed = false;
                 }
             });
             
@@ -183,7 +180,7 @@ class Game {
                 // Update player data in Firebase
                 this.multiplayerManager.updatePlayerData();
                 
-                // Update all remote players
+                // Update/Display all remote players
                 this.multiplayerManager.updateRemotePlayers(deltaTime);
             }
             
@@ -200,9 +197,9 @@ class Game {
         // Add the skybox to the scene
         this.createSkybox();
 
-        this.scene.environmentIntensity = 0.0; // Set environment/skybox intensity for lighting
+        this.scene.environmentIntensity = 0.0; // Disable environment/skybox intensity for lighting
         
-        // Setup beforeunload handler to clean up multiplayer on page close
+        // Setup before unload handler to clean up multiplayer on page close
         window.addEventListener('beforeunload', () => {
             if (this.multiplayerManager) {
                 this.multiplayerManager.dispose();
@@ -430,7 +427,7 @@ class Game {
         this.camera.wheelDeltaPercentage = 0.01; // Smoother zooming
 
         // TODO temp workaround to get the camera scroll working on app start
-        this.updateThirdPersonCamera();
+        //this.updateThirdPersonCamera();
         
         // Handle camera mode toggle
         window.addEventListener('keydown', (ev) => {
@@ -501,12 +498,6 @@ class Game {
 
         // Process mouse rotation if we have movement
         if (this._mouseMovement !== 0) {
-            if (this.debugMouseRotation) {
-                console.log('Mouse rotate:', {
-                    deltaX: this._mouseMovement,
-                    rotation: -this._mouseMovement * this.mouseSensitivity,
-                });
-            }
             this.player.rotate(this._mouseMovement * this.mouseSensitivity);
             this._mouseMovement = 0; // Reset after processing
         }
